@@ -145,15 +145,27 @@ def main():
     global tinylist
     ##list only
     print (inp.split(' ')[0])
-
     if inp.split(' ')[0] == 'killdupes':
         killdupes(inp.split(' ')[1])
         return(main())
+
+
     if inp.split(' ')[0] == 'listall':
         a = wholedir(inp.split(' ')[1], 'n')
         print(a)
         print('\n')
         return(main())
+
+    if inp.split(' ')[0] == 'saveall':
+        a = wholedir(inp.split(' ')[1], 'n')
+        texte = ''
+        for b in a:
+            texte += b + '\n'
+
+        fileio = open(os.getcwd() + '/allfiles.txt', 'w')
+        fileio.write(texte)
+        fileio.close()
+        print('saved to allfiles.txt')
 
     if inp.split(' ')[0] == 'list':
         print('Getting contents for: '  + inp.split(' ')[1] + '\n\n')
@@ -161,7 +173,7 @@ def main():
         o = getcontents(inp.split(' ')[1])
         print(o)
 
-    else:
+    elif inp.split(' ')[0] == 'start':
 
         ##compile
         pos = inp.replace('start ', ' ').split(' ')
@@ -184,4 +196,6 @@ def main():
 if __name__ == '__main__':
     print('start (/) (y/n) [Subdirs?] \n Alternatively: type list /')
     print('\nor type listall /\nkilldupes file.txt\n')
+    print ('ALTERNATIVELY: biglistall /\n')
+    print('/saveall filename\n')
     main()
